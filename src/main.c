@@ -13,7 +13,6 @@ void draw_objs() {
     {
         snek_draw_obj(vector_get(objs, i));
     }
-    
 }
 
 int main() {
@@ -43,6 +42,9 @@ int main() {
         .debug_hitbox = true
     };
 
+    SnekObject* selected = NULL;
+    SnekObject* hovered = NULL;
+
     objs = create_vector(sizeof(SnekObject));
 
     menu.mode = SNEKMODE_NONE;
@@ -54,6 +56,11 @@ int main() {
 
     while (!WindowShouldClose())
     {
+        hovered = snek_get_collided_obj(objs);
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseY() > 50)
+        {
+            selected = hovered;
+        }
 
         menu_the_objs(objs, &menu);
 
@@ -62,9 +69,9 @@ int main() {
 
         draw_objs();
 
-        DrawText(TextFormat("Collided: %p", snek_get_collided_obj(objs)), 0, 50, 20, BLACK);
+        DrawText(TextFormat("Collided: %p", selected), 0, 50, 20, BLACK);
 
-        draw_menu(&menu, 0, 0, snek_get_collided_obj(objs));
+        draw_menu(&menu, 0, 0, selected);
 
         EndDrawing();
     }

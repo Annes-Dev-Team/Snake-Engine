@@ -7,6 +7,7 @@
 #include <engine/renderer.h>
 
 #include <math.h>
+#include <stdio.h>
 
 SnekObject* snek_get_collided_obj(VectorHandle ar) {
     for (size_t i = 0; i < vector_size(ar); i++)
@@ -21,6 +22,7 @@ SnekObject* snek_get_collided_obj(VectorHandle ar) {
 }
 
 void draw_menu(Menu* menu, int x, int y, SnekObject* selected) {
+    char _buf[256];
     
     Rectangle nonerect = {
         .x = x,
@@ -77,27 +79,40 @@ void draw_menu(Menu* menu, int x, int y, SnekObject* selected) {
         return;
     }
     
-    DrawText(
+    /*DrawText(
         "X:",
         x + 250, y + 10, 20, BLACK
-    );
+    );*/
 
-    gui_value_boxf(x + 270, y, 80, 40, "X:", "opo", &selected->x, key == KEY_X);
+    snprintf(_buf, sizeof(_buf), "%.2f", selected->x);
+    gui_value_boxf(x + 250, y, 80, 40, "X:", _buf, &selected->x);
 
-    DrawText(
+    /*DrawText(
         "Y:",
         x + 350, y + 10, 20, BLACK
     );
+    */
 
+    snprintf(_buf, sizeof(_buf), "%.2f", selected->y);
+    gui_value_boxf(x + 350, y, 80, 40, "Y:", _buf, &selected->y);
+
+    /*
     DrawText(
         "Rotation:",
         x + 450, y + 10, 20, BLACK
-    );
-    
-    DrawText(
+    );*/
+
+    snprintf(_buf, sizeof(_buf), "%.2f", selected->rot);
+    gui_value_boxf(x + 500, y, 80, 40, "Rotation:", _buf, &selected->rot);
+
+    /*DrawText(
         "Scale:",
         x + 620, y + 10, 20, BLACK
-    );
+    );*/
+
+    snprintf(_buf, sizeof(_buf), "%.2f", selected->scalex);
+    gui_value_boxf(x + 630, y, 80, 40, "Scale:", _buf, &selected->scalex);
+
 }
 
 int snap(float tosnap, int amountofsnap) {

@@ -14,18 +14,15 @@ void snek_draw_obj(SnekObject* obj) {
     obj->hitbox.y = obj->y;
     obj->hitbox.width = obj->scalex;
     obj->hitbox.height = obj->scaley;
-    
-
-    
-    switch (obj->type)
-    {
-    case SNEK_RECTANGLE: {
         Rectangle rec = {
             targetx,
             targety,
             obj->scalex,
             obj->scaley
         };
+    switch (obj->type)
+    {
+    case SNEK_RECTANGLE: {
         DrawRectangleRec(rec, obj->color);
         break;
     }
@@ -37,6 +34,20 @@ void snek_draw_obj(SnekObject* obj) {
     case SNEK_LINE:
         DrawLine(targetx, targety, targetx + obj->scalex, targety + obj->scaley, obj->color);
         break;
+    
+    case SNEK_TEXTURE: {
+        SetTextureFilter(*obj->extra_data.texture, obj->extra_data.filter);
+        DrawTexturePro(*obj->extra_data.texture, 
+            (Rectangle){ 0, 0, (float)obj->extra_data.texture->width, (float)obj->extra_data.texture->height },
+            rec,
+            (Vector2){0, 0},
+            0, obj->color
+        );
+    }
+
+    case SNEK_POLY: {
+        DrawTriangleFan(obj->extra_data.verts, obj->extra_data.vert_len, obj->color);
+    }
     
     default:
         

@@ -3,3 +3,6 @@ obj/*
 bin/*
 a.out
 .DS_Store
+testproj/*
+*.o
+*.s

@@ -2,13 +2,15 @@
 #include <engine/object.h>
 #include <engine/array.h>
 #include <engine/movement.h>
+#include <engine/project.h>
 
 #include <math.h>
 
-VectorHandle objs;
+//VectorHandle objs;
+
 Menu menu;
 
-void draw_objs() {
+void draw_objs(VectorHandle objs) {
     for (size_t i = 0; i < vector_size(objs); i++)
     {
         snek_draw_obj(vector_get(objs, i));
@@ -21,6 +23,14 @@ int main() {
     SetTargetFPS(60);
 
     Texture2D e = LoadTexture("lol.png");
+
+    SnekProject proj = {
+        .compile_mode=0,
+        .objs = create_vector(sizeof(SnekObject)),
+        .path = TextFormat(
+            "%stestproj"
+        )
+    };
 
     Vector2 oaw[3] = {
         (Vector2){25, 0},
@@ -63,29 +73,27 @@ int main() {
     SnekObject* selected = NULL;
     SnekObject* hovered = NULL;
 
-    objs = create_vector(sizeof(SnekObject));
-
     menu.mode = SNEKMODE_NONE;
     menu.rot_snap = 0;
     menu.snap = 0;
 
-    vector_push_back(objs, &opo);
-    vector_push_back(objs, &opo2);
+    vector_push_back(proj.objs, &opo);
+    vector_push_back(proj.objs, &opo2);
 
     while (!WindowShouldClose())
     {
-        hovered = snek_get_collided_obj(objs);
+        hovered = snek_get_collided_obj(proj.objs);
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseY() > 50)
         {
             selected = hovered;
         }
 
-        menu_the_objs(objs, &menu);
+        menu_the_objs(proj.objs, &menu);
 
         BeginDrawing();
         ClearBackground(WHITE);
 
-        draw_objs();
+        draw_objs(proj.objs);
 
         DrawText(TextFormat("Collided: %p", selected), 0, 50, 20, BLACK);
 

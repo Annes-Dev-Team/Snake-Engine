@@ -6,8 +6,6 @@
 
 #include <math.h>
 
-//VectorHandle objs;
-
 Menu menu;
 
 void draw_objs(VectorHandle objs) {
@@ -28,7 +26,8 @@ int main() {
         .compile_mode=0,
         .objs = create_vector(sizeof(SnekObject)),
         .path = TextFormat(
-            "%stestproj"
+            "%stestproj",
+            GetApplicationDirectory()
         )
     };
 
@@ -79,6 +78,8 @@ int main() {
 
     vector_push_back(proj.objs, &opo);
     vector_push_back(proj.objs, &opo2);
+
+    generate_project_files(&proj);
 
     while (!WindowShouldClose())
     {

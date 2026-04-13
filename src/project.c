@@ -23,4 +23,14 @@ void generate_project_files(SnekProject* proj) {
         ),
         ""
     );
+
+    if (proj->compile_mode == 0)
+    {
+        SaveFileText(
+            TextFormat(
+                "%s/main.c", src_path
+            ),
+            ""
+        );
+    }
 }

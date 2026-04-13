@@ -79,40 +79,20 @@ void draw_menu(Menu* menu, int x, int y, SnekObject* selected) {
         return;
     }
     
-    /*DrawText(
-        "X:",
-        x + 250, y + 10, 20, BLACK
-    );*/
-
     snprintf(_buf, sizeof(_buf), "%.2f", selected->x);
     gui_value_boxf(x + 250, y, 80, 40, "X:", _buf, &selected->x);
-
-    /*DrawText(
-        "Y:",
-        x + 350, y + 10, 20, BLACK
-    );
-    */
 
     snprintf(_buf, sizeof(_buf), "%.2f", selected->y);
     gui_value_boxf(x + 350, y, 80, 40, "Y:", _buf, &selected->y);
 
-    /*
-    DrawText(
-        "Rotation:",
-        x + 450, y + 10, 20, BLACK
-    );*/
-
     snprintf(_buf, sizeof(_buf), "%.2f", selected->rot);
     gui_value_boxf(x + 500, y, 80, 40, "Rotation:", _buf, &selected->rot);
 
-    /*DrawText(
-        "Scale:",
-        x + 620, y + 10, 20, BLACK
-    );*/
-
     snprintf(_buf, sizeof(_buf), "%.2f", selected->scalex);
-    gui_value_boxf(x + 630, y, 80, 40, "Scale:", _buf, &selected->scalex);
+    gui_value_boxf(x + 630, y, 80, 40, "Scale X:", _buf, &selected->scalex);
 
+    snprintf(_buf, sizeof(_buf), "%.2f", selected->scaley);
+    gui_value_boxf(x + 780, y, 80, 40, "Scale Y:", _buf, &selected->scaley);
 }
 
 int snap(float tosnap, int amountofsnap) {

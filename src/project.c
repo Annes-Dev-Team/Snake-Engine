@@ -27,6 +27,9 @@ void generate_project_files(SnekProject* proj) {
 
     MakeDirectory(src_path);
     MakeDirectory(bin_path);
+    MakeDirectory(
+        TextFormat("%s/assets", bin_path)
+    );
 
     cJSON* snek = generate_project_snek(proj);
     const char* out = cJSON_Print(snek);

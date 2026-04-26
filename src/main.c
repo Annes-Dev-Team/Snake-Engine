@@ -5,6 +5,7 @@
 #include <engine/project.h>
 
 #include <math.h>
+#include <string.h>
 
 Menu menu;
 
@@ -25,10 +26,7 @@ int main() {
     SnekProject proj = {
         .compile_mode=0,
         .objs = create_vector(sizeof(SnekObject)),
-        .path = TextFormat(
-            "%stestproj",
-            GetApplicationDirectory()
-        )
+        .path = strdup(TextFormat("%stestproj", GetApplicationDirectory()))
     };
 
     Vector2 oaw[3] = {

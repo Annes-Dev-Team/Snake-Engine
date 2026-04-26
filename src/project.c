@@ -28,7 +28,7 @@ void generate_project_files(SnekProject* proj) {
     {
         SaveFileText(
             TextFormat(
-                "%s/main.c", src_path
+                "%smain.c", src_path
             ),
             ""
         );

@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	cc src/*.c -c -std=c17 -Iinclude -g
+	cc $(shell find src -name "*.c") -c -std=c17 -Iinclude -g
 	
 	mv *.o obj/
 

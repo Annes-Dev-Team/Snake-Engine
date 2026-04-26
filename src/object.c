@@ -1,5 +1,6 @@
 #include <engine/object.h>
 #include <raylib/rlgl.h>
+#include <cJSON.h>
 
 void snek_draw_obj(SnekObject* obj) {
 
@@ -65,4 +66,15 @@ void snek_draw_obj(SnekObject* obj) {
         };
         DrawRectangleRec(obj->hitbox, clr);
     }
+}
+
+void snek_generate_obj_data(SnekObject* obj, cJSON* json) {
+    cJSON_AddNumberToObject(json, "type", obj->type);
+    cJSON_AddNumberToObject(json, "x", obj->x);
+    cJSON_AddNumberToObject(json, "y", obj->y);
+
+    cJSON_AddNumberToObject(json, "scalex", obj->scalex);
+    cJSON_AddNumberToObject(json, "scaley", obj->scaley);
+    cJSON_AddNumberToObject(json, "rot", obj->rot);
+    
 }

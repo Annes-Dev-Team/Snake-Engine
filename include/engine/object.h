@@ -1,4 +1,5 @@
 #include <raylib/raylib.h>
+#include <cJSON.h>
 
 #pragma once
 
@@ -30,6 +31,7 @@ typedef struct
     Rectangle hitbox;
     SnekObjectData extra_data;
     bool debug_hitbox;
+    char* name;
 
     SnekObjectType type;
 } SnekObject;
@@ -40,3 +42,4 @@ typedef struct
 } SnekCamera;
 
 void snek_draw_obj(SnekObject* obj);
+void snek_generate_obj_data(SnekObject* obj, cJSON* json);

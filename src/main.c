@@ -6,6 +6,7 @@
 
 #include <math.h>
 #include <string.h>
+#include <stdio.h>
 
 Menu menu;
 
@@ -36,6 +37,7 @@ int main() {
     };
     
     SnekObject opo = {
+        .name = MemAlloc(sizeof(char)*255),
         .x = 100,
         .y = 100,
         .scalex = 100,
@@ -45,6 +47,7 @@ int main() {
         .color = GREEN,
         .debug_hitbox = true
     };
+    snprintf(opo.name, 255, "Skibidi");
 
     opo.extra_data = (SnekObjectData){
         .verts = oaw,
@@ -52,6 +55,7 @@ int main() {
     };
 
     SnekObject opo2 = {
+        .name = MemAlloc(sizeof(char)*255),
         .x = 100,
         .y = 300,
         .scalex = 100,
@@ -61,6 +65,7 @@ int main() {
         .color = WHITE,
         .debug_hitbox = false
     };
+    snprintf(opo2.name, 255, "Toilet");
 
     opo2.extra_data = (SnekObjectData){
         .filter = TEXTURE_FILTER_BILINEAR,

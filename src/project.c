@@ -1,6 +1,7 @@
 #include <engine/project.h>
-
+#include <engine/array.h>
 #include <raylib/raylib.h>
+#include <engine/object.h>
 #include <cJSON.h>
 
 const char* mainthing = "int main() {";
@@ -13,6 +14,12 @@ cJSON* generate_project_snek(SnekProject* proj) {
     cJSON_AddNumberToObject(root, "compile_mode", proj->compile_mode);
     
     cJSON* objs = cJSON_AddObjectToObject(root, "objects");
+    for (size_t i = 0; i < vector_size(proj->objs); i++)
+    {
+        SnekObject* obj = vector_get( proj->objs, i);
+        cJSON* e = cJSON_AddObjectToObject(objs, obj->name);
+        snek_generate_obj_data(obj, e);
+    }
     
     return root;
 }

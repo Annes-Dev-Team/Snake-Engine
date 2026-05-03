@@ -8,13 +8,13 @@ build:
 		-framework Cocoa \
 		-framework IOKit \
 		-framework CoreVideo \
-		-framework CoreFoundation -g
+		-framework CoreFoundation -g -O0
 
 	c++ src/*.cpp obj/*.o -lraylib -shared -o bin/snek.dylib -std=c++20 -Iinclude \
 		-framework Cocoa \
 		-framework IOKit \
 		-framework CoreVideo \
-		-framework CoreFoundation -g
+		-framework CoreFoundation -g -O0
 	
 	cc src/*.c -S -std=c17 -Iinclude -O0 # asm thingy
 

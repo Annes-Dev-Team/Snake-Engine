@@ -1,16 +1,20 @@
+#pragma once
 #include <b64/cencode.h>
 #include <b64/cdecode.h>
 
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
 // the encode and deocde functions were taken by the official libb64 examples and modified.
 
 #define SIZE 256
-char* encode_base64(const char* input)
+char* encode_base64(const char* input, size_t size)
 {
+
+    size_t output_length = 4 * ((size + 2) / 3);
 	/* set up a destination buffer large enough to hold the encoded data */
-	char* output = (char*)malloc(SIZE);
+	char* output = (char*)malloc(output_length + 1);
 	/* keep track of our encoded position */
 	char* c = output;
 	/* store the number of bytes encoded by a single call */
@@ -22,7 +26,7 @@ char* encode_base64(const char* input)
 	/* initialise the encoder state */
 	base64_init_encodestate(&s);
 	/* gather data from the input and send it to the output */
-	cnt = base64_encode_block(input, strlen(input), c, &s);
+	cnt = base64_encode_block(input, size, c, &s);
 	c += cnt;
 	/* since we have encoded the entire input string, we know that 
 	   there is no more input data; finalise the encoding */

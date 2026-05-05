@@ -1,13 +1,21 @@
 #include <engine/array.h>
 #include <cJSON.h>
+
+typedef enum {
+    COMPILE_EXECUTABLE = 0,
+    COMPILE_LIB
+} CompileMode;
+
 typedef struct
 {
     VectorHandle objs;
+    VectorHandle images;
+    VectorHandle sounds;
     /*
     0 = executable
     1 = lib
     */
-    unsigned char compile_mode;
+    CompileMode compile_mode;
     const char* path;
     const char* name;
     

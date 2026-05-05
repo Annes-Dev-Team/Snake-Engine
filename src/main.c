@@ -3,7 +3,6 @@
 #include <engine/array.h>
 #include <engine/movement.h>
 #include <engine/project.h>
-#include <engine/assetsb64.h>
 
 #include <string.h>
 #include <stdio.h>
@@ -23,11 +22,12 @@ int main() {
     SetTargetFPS(60);
 
     Texture2D e = LoadTexture("lol.png");
-    printf("%.100s", encode_image("lol.png"));
 
     SnekProject proj = {
-        .compile_mode=0,
+        .compile_mode=COMPILE_EXECUTABLE,
         .objs = create_vector(sizeof(SnekObject)),
+        .images = create_vector(sizeof(Image)),
+        .sounds = create_vector(sizeof(Sound)),
         .path = strdup(TextFormat("%stestproj", GetApplicationDirectory()))
     };
 
